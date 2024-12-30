@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="github.css">
+  <style>
+        @font-face {
+        font-family: 'Nunito';
+        src: url('/src/Nunito-VariableFont_wght.ttf') format('truetype');
+    }
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #000000;
+
+    font-family: 'Nunito', Arial, sans-serif !important; 
+}
+.markdown-body {
+    box-sizing: border-box;
+    margin: 0 auto;
+    margin-top: 30px;
+    padding: 70px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 70%;
+}
+.navbar {position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #000000;
+    padding: 1rem;
+    z-index: 1000;
+    border: 2px solid #0B192C ;
+ }
+.navbar-links {list-style: none;display: flex;justify-content: center;}
+.navbar-links li {margin: 0 20px;}
+.navbar-links a {color: white;text-decoration: none;font-size: 1.2rem;}
+.navbar-links a:hover {color: #FF6500;}
+.page,
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page {
+  background: inherit;
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+   
+}
+
+.footer {
+  background: #000000;
+  border: 3px solid #0B192C ;
+  position: sticky;
+  bottom: 0;
+  height: 300px;
+  color: #eee;
+}
+
+</style>
+</head>
+<body>
+<nav class="navbar">
+	<ul class="navbar-links">
+    <li><a href="index.html">Home</a></li>
+		<li><a href="blogs.html">Bloges</a></li>
+		<li><a href="about.html">About</a></li>
+	</ul>
+</nav>
+
+<main class="page">
+   
+ 
+<article class="markdown-body" data-theme="light">
+	<div id="content">
+        <h1>Alpine.js Tutorial for Beginners</h1>
+<p>Alpine.js is a lightweight JavaScript framework designed to handle simple interactivity in web applications. It provides a declarative syntax similar to Vue.js or React, but with a much smaller footprint, making it an excellent choice for projects where you want the power of JavaScript without the overhead of a full framework.</p>
+<p>This tutorial will walk you through the basics of Alpine.js and provide examples to help you get started.</p>
+<hr>
+<h2>1. Setting Up Alpine.js</h2>
+<p>To use Alpine.js, include it in your HTML file via a CDN link:</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Alpine.js Tutorial&lt;/title&gt;
+    &lt;script defer src=&quot;https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- Your content here --&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>That's it! Alpine.js is now ready to use.</p>
+<hr>
+<h2>2. Basic Alpine.js Syntax</h2>
+<p>Alpine.js uses directives, which are special attributes prefixed with <code>x-</code>. Here are some common ones:</p>
+<ul>
+<li><strong><code>x-data</code></strong>: Defines the data and scope for a component.</li>
+<li><strong><code>x-bind</code></strong>: Dynamically binds attributes to data.</li>
+<li><strong><code>x-on</code></strong>: Listens for and handles events.</li>
+<li><strong><code>x-model</code></strong>: Creates two-way data binding.</li>
+<li><strong><code>x-show</code></strong>: Conditionally shows or hides elements.</li>
+</ul>
+<hr>
+<h2>3. Example 1: Toggle Visibility</h2>
+<p>This example demonstrates how to show and hide content dynamically using <code>x-show</code> and <code>x-on</code>.</p>
+<pre><code class="language-html">&lt;div x-data=&quot;{ isVisible: false }&quot;&gt;
+    &lt;button x-on:click=&quot;isVisible = !isVisible&quot;&gt;Toggle Content&lt;/button&gt;
+    &lt;div x-show=&quot;isVisible&quot;&gt;
+        &lt;p&gt;Hello, Alpine.js!&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<ul>
+<li><code>x-data</code> initializes the <code>isVisible</code> property.</li>
+<li><code>x-on:click</code> toggles the value of <code>isVisible</code>.</li>
+<li><code>x-show</code> displays the content based on the value of <code>isVisible</code>.</li>
+</ul>
+<hr>
+<h2>4. Example 2: Two-Way Data Binding</h2>
+<p>Alpine.js makes it easy to bind form inputs to data with <code>x-model</code>.</p>
+<pre><code class="language-html">&lt;div x-data=&quot;{ name: '' }&quot;&gt;
+    &lt;input type=&quot;text&quot; x-model=&quot;name&quot; placeholder=&quot;Enter your name&quot;&gt;
+    &lt;p&gt;Your name is: &lt;strong x-text=&quot;name&quot;&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+<ul>
+<li><code>x-model</code> binds the input value to the <code>name</code> property.</li>
+<li><code>x-text</code> updates the text content of the <code>&lt;strong&gt;</code> tag with the value of <code>name</code>.</li>
+</ul>
+<hr>
+<h2>5. Example 3: Dynamic Classes</h2>
+<p>Use <code>x-bind</code> to dynamically add or remove classes based on data.</p>
+<pre><code class="language-html">&lt;div x-data=&quot;{ isActive: false }&quot;&gt;
+    &lt;button x-on:click=&quot;isActive = !isActive&quot; x-bind:class=&quot;{ 'active': isActive, 'inactive': !isActive }&quot;&gt;
+        Toggle Class
+    &lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
+<ul>
+<li><code>x-bind:class</code> applies the <code>active</code> class if <code>isActive</code> is true, and <code>inactive</code> if it is false.</li>
+<li>This example allows you to toggle button styles dynamically.</li>
+</ul>
+<hr>
+<h2>6. Example 4: Looping Through Data</h2>
+<p>You can use <code>x-for</code> to iterate over arrays and display dynamic content.</p>
+<pre><code class="language-html">&lt;div x-data=&quot;{ items: ['Apple', 'Banana', 'Cherry'] }&quot;&gt;
+    &lt;ul&gt;
+        &lt;li x-for=&quot;item in items&quot; x-text=&quot;item&quot;&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+</code></pre>
+<ul>
+<li><code>x-for</code> loops through the <code>items</code> array.</li>
+<li><code>x-text</code> displays each item in the array.</li>
+</ul>
+<hr>
+<h2>7. Example 5: Handling Events</h2>
+<p>Alpine.js makes it simple to handle events with <code>x-on</code>.</p>
+<pre><code class="language-html">&lt;div x-data=&quot;{ count: 0 }&quot;&gt;
+    &lt;button x-on:click=&quot;count++&quot;&gt;Increment&lt;/button&gt;
+    &lt;button x-on:click=&quot;count--&quot;&gt;Decrement&lt;/button&gt;
+    &lt;p&gt;Count: &lt;span x-text=&quot;count&quot;&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+<ul>
+<li><code>x-on:click</code> increments or decrements the <code>count</code> property.</li>
+<li><code>x-text</code> updates the displayed count dynamically.</li>
+</ul>
+<hr>
+<h2>8. Example 6: Transition Effects</h2>
+<p>Add smooth transitions to your elements with Alpine.js’s built-in transition directives.</p>
+<pre><code class="language-html">&lt;div x-data=&quot;{ isVisible: false }&quot;&gt;
+    &lt;button x-on:click=&quot;isVisible = !isVisible&quot;&gt;Toggle Visibility&lt;/button&gt;
+    &lt;div x-show=&quot;isVisible&quot; x-transition&gt;
+        &lt;p&gt;Fading in and out!&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<ul>
+<li><code>x-transition</code> adds a fade effect when the element is shown or hidden.</li>
+<li>This feature enhances user experience with minimal effort.</li>
+</ul>
+<hr>
+<h2>9. Debugging Alpine.js</h2>
+<p>Debugging in Alpine.js is straightforward. To log the current state of your data, use <code>$data</code> in your browser console:</p>
+<pre><code class="language-html">&lt;div x-data=&quot;{ count: 0 }&quot;&gt;
+    &lt;button x-on:click=&quot;count++&quot;&gt;Increment&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
+<p>In the browser console, you can access the data by selecting the element and typing:</p>
+<pre><code class="language-javascript">$el.__x.$data
+</code></pre>
+<p>This will display the current state of the component’s data.</p>
+<hr>
+<h2>10. Wrapping Up</h2>
+<p>Alpine.js is an excellent tool for adding interactivity to your web pages without the complexity of larger frameworks. Its declarative syntax is intuitive and easy to use, making it perfect for beginners and lightweight projects. Try Alpine.js in your next project and enjoy its simplicity and power!</p>
+
+	</div>
+</article>
+</main>
+<footer class="footer">
+    <p class="content">The hidden footer</p>
+  </footer>
+</body>
+</html>

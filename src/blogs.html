@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="github.css">
+  <style>
+        @font-face {
+        font-family: 'Nunito';
+        src: url('/src/Nunito-VariableFont_wght.ttf') format('truetype');
+    }
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #000000;
+
+    font-family: 'Nunito', Arial, sans-serif !important; 
+}
+.markdown-body {
+    box-sizing: border-box;
+    margin: 0 auto;
+    margin-top: 30px;
+    padding: 70px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 70%;
+}
+.navbar {position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #000000;
+    padding: 1rem;
+    z-index: 1000;
+    border: 2px solid #0B192C ;
+ }
+.navbar-links {list-style: none;display: flex;justify-content: center;}
+.navbar-links li {margin: 0 20px;}
+.navbar-links a {color: white;text-decoration: none;font-size: 1.2rem;}
+.navbar-links a:hover {color: #FF6500;}
+.page,
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page {
+  background: inherit;
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+   
+}
+
+.footer {
+  background: #000000;
+  border: 3px solid #0B192C ;
+  position: sticky;
+  bottom: 0;
+  height: 300px;
+  color: #eee;
+}
+
+</style>
+</head>
+<body>
+<nav class="navbar">
+	<ul class="navbar-links">
+    <li><a href="index.html">Home</a></li>
+		<li><a href="blogs.html">Bloges</a></li>
+		<li><a href="about.html">About</a></li>
+	</ul>
+</nav>
+
+<main class="page">
+   
+ 
+<article class="markdown-body" data-theme="light">
+	<div id="content">
+        
+
+
+
+
+        
+        <div class="card">
+            <h2> alpine.js </h2>
+            <p>Posted on 1/1/2000 </p>
+            <p> this is about the main  . </p>
+            <a href=" alppin.html " class="read-more">Read More</a>
+        </div>
+        
+        <div class="card">
+            <h2> what is a databse </h2>
+            <p>Posted on 12/30/2024 </p>
+            <p> we will talke about what is a databse . </p>
+            <a href=" databse.html " class="read-more">Read More</a>
+        </div>
+        
+        <div class="card">
+            <h2> flages in go-lang </h2>
+            <p>Posted on 12/30/2024 </p>
+            <p> what is the best way to make flages   . </p>
+            <a href=" flag.html " class="read-more">Read More</a>
+        </div>
+        
+        <div class="card">
+            <h2> fmt in go-lang </h2>
+            <p>Posted on 12/30/2024 </p>
+            <p> this how to do string stuff with go-lang  . </p>
+            <a href=" fmt.html " class="read-more">Read More</a>
+        </div>
+        
+
+        <style>
+        .card {
+            background-color: #D8D2C2;
+            color: #000000;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            min-width: 30vw;
+        }
+        .card h2 {
+            margin-top: 0;
+        }
+        .card .read-more {
+            color: #FF6500;
+            text-decoration: none;
+        }
+        .card .read-more:hover {
+            text-decoration: underline;
+        }
+        </style>
+
+
+
+
+
+
+
+
+	</div>
+</article>
+</main>
+<footer class="footer">
+    <p class="content">The hidden footer</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,263 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="github.css">
+  <style>
+        @font-face {
+        font-family: 'Nunito';
+        src: url('/src/Nunito-VariableFont_wght.ttf') format('truetype');
+    }
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #000000;
+
+    font-family: 'Nunito', Arial, sans-serif !important; 
+}
+.markdown-body {
+    box-sizing: border-box;
+    margin: 0 auto;
+    margin-top: 30px;
+    padding: 70px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 70%;
+}
+.navbar {position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #000000;
+    padding: 1rem;
+    z-index: 1000;
+    border: 2px solid #0B192C ;
+ }
+.navbar-links {list-style: none;display: flex;justify-content: center;}
+.navbar-links li {margin: 0 20px;}
+.navbar-links a {color: white;text-decoration: none;font-size: 1.2rem;}
+.navbar-links a:hover {color: #FF6500;}
+.page,
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page {
+  background: inherit;
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+   
+}
+
+.footer {
+  background: #000000;
+  border: 3px solid #0B192C ;
+  position: sticky;
+  bottom: 0;
+  height: 300px;
+  color: #eee;
+}
+
+</style>
+</head>
+<body>
+<nav class="navbar">
+	<ul class="navbar-links">
+    <li><a href="index.html">Home</a></li>
+		<li><a href="blogs.html">Bloges</a></li>
+		<li><a href="about.html">About</a></li>
+	</ul>
+</nav>
+
+<main class="page">
+   
+ 
+<article class="markdown-body" data-theme="light">
+	<div id="content">
+        <h1><code>fmt</code> Package</h1>
+<p>The <code>fmt</code> package provides functions for formatted I/O, string formatting, and error handling. It is part of the standard library in Go.</p>
+<hr>
+<h3><strong>Output Functions</strong></h3>
+<h4><strong>1. <code>fmt.Println</code></strong></h4>
+<p>Prints values with a newline at the end.</p>
+<pre><code class="language-go">package main
+
+import &quot;fmt&quot;
+
+func main() {
+    fmt.Println(&quot;Hello, World!&quot;)
+    fmt.Println(&quot;Go is awesome!&quot;)
+}
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>Hello, World!
+Go is awesome!
+</code></pre>
+<h4><strong>2. <code>fmt.Print</code></strong></h4>
+<p>Prints values without adding a newline.</p>
+<pre><code class="language-go">package main
+
+import &quot;fmt&quot;
+
+func main() {
+    fmt.Print(&quot;Hello, &quot;)
+    fmt.Print(&quot;World!&quot;)
+}
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>Hello, World!
+</code></pre>
+<h4><strong>3. <code>fmt.Printf</code></strong></h4>
+<p>Prints formatted values using format specifiers.</p>
+<pre><code class="language-go">package main
+
+import &quot;fmt&quot;
+
+func main() {
+    name := &quot;Areen&quot;
+    age := 16
+    fmt.Printf(&quot;My name is %s and I am %d years old.\n&quot;, name, age)
+}
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>My name is Areen and I am 16 years old.
+</code></pre>
+<hr>
+<h3><strong>String Formatting Functions</strong></h3>
+<h4><strong>4. <code>fmt.Sprintln</code></strong></h4>
+<p>Formats values and returns them as a string with a newline.</p>
+<pre><code class="language-go">package main
+
+import &quot;fmt&quot;
+
+func main() {
+    str := fmt.Sprintln(&quot;Hello,&quot;, &quot;World!&quot;)
+    fmt.Print(str)
+}
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>Hello, World!
+</code></pre>
+<h4><strong>5. <code>fmt.Sprint</code></strong></h4>
+<p>Formats values and returns them as a string without a newline.</p>
+<pre><code class="language-go">package main
+
+import &quot;fmt&quot;
+
+func main() {
+    str := fmt.Sprint(&quot;Hello, &quot;, &quot;World!&quot;)
+    fmt.Print(str)
+}
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>Hello, World!
+</code></pre>
+<h4><strong>6. <code>fmt.Sprintf</code></strong></h4>
+<p>Formats values and returns them as a formatted string.</p>
+<pre><code class="language-go">package main
+
+import &quot;fmt&quot;
+
+func main() {
+    name := &quot;Areen&quot;
+    age := 16
+    str := fmt.Sprintf(&quot;My name is %s and I am %d years old.&quot;, name, age)
+    fmt.Println(str)
+}
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>My name is Areen and I am 16 years old.
+</code></pre>
+<hr>
+<h3><strong>Error Formatting</strong></h3>
+<h4><strong>7. <code>fmt.Errorf</code></strong></h4>
+<p>Creates a formatted error message of type <code>error</code>.</p>
+<pre><code class="language-go">package main
+
+import (
+    &quot;errors&quot;
+    &quot;fmt&quot;
+)
+
+func main() {
+    err := fmt.Errorf(&quot;this is an error: %w&quot;, errors.New(&quot;underlying issue&quot;))
+    fmt.Println(err)
+}
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>this is an error: underlying issue
+</code></pre>
+<hr>
+<h3><strong>Input Functions</strong></h3>
+<h4><strong>8. <code>fmt.Scan</code></strong></h4>
+<p>Reads space-separated values from standard input.</p>
+<pre><code class="language-go">package main
+
+import &quot;fmt&quot;
+
+func main() {
+    var name string
+    fmt.Print(&quot;Enter your name: &quot;)
+    fmt.Scan(&amp;name)
+    fmt.Println(&quot;Hello,&quot;, name)
+}
+</code></pre>
+<p><strong>Example Input:</strong></p>
+<pre><code>Enter your name: Areen
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>Hello, Areen
+</code></pre>
+<h4><strong>9. <code>fmt.Scanln</code></strong></h4>
+<p>Reads values from standard input until a newline is encountered.</p>
+<pre><code class="language-go">package main
+
+import &quot;fmt&quot;
+
+func main() {
+    var name string
+    fmt.Print(&quot;Enter your name: &quot;)
+    fmt.Scanln(&amp;name)
+    fmt.Println(&quot;Hello,&quot;, name)
+}
+</code></pre>
+<p><strong>Example Input:</strong></p>
+<pre><code>Enter your name: Areen
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>Hello, Areen
+</code></pre>
+<h4><strong>10. <code>fmt.Scanf</code></strong></h4>
+<p>Reads formatted input from standard input.</p>
+<pre><code class="language-go">package main
+
+import &quot;fmt&quot;
+
+func main() {
+    var name string
+    var age int
+    fmt.Print(&quot;Enter your name and age: &quot;)
+    fmt.Scanf(&quot;%s %d&quot;, &amp;name, &amp;age)
+    fmt.Printf(&quot;Hello %s, you are %d years old.\n&quot;, name, age)
+}
+</code></pre>
+<p><strong>Example Input:</strong></p>
+<pre><code>Enter your name and age: Areen 16
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>Hello Areen, you are 16 years old.
+</code></pre>
+<hr>
+<p>These examples showcase how to use each function in the <code>fmt</code> package. Let me know if you want further clarification!</p>
+
+	</div>
+</article>
+</main>
+<footer class="footer">
+    <p class="content">The hidden footer</p>
+  </footer>
+</body>
+</html>

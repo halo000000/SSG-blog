@@ -1,0 +1,267 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="github.css">
+  <style>
+        @font-face {
+        font-family: 'Nunito';
+        src: url('/src/Nunito-VariableFont_wght.ttf') format('truetype');
+    }
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #000000;
+
+    font-family: 'Nunito', Arial, sans-serif !important; 
+}
+.markdown-body {
+    box-sizing: border-box;
+    margin: 0 auto;
+    margin-top: 30px;
+    padding: 70px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 70%;
+}
+.navbar {position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #000000;
+    padding: 1rem;
+    z-index: 1000;
+    border: 2px solid #0B192C ;
+ }
+.navbar-links {list-style: none;display: flex;justify-content: center;}
+.navbar-links li {margin: 0 20px;}
+.navbar-links a {color: white;text-decoration: none;font-size: 1.2rem;}
+.navbar-links a:hover {color: #FF6500;}
+.page,
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page {
+  background: inherit;
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+   
+}
+
+.footer {
+  background: #000000;
+  border: 3px solid #0B192C ;
+  position: sticky;
+  bottom: 0;
+  height: 300px;
+  color: #eee;
+}
+
+</style>
+</head>
+<body>
+<nav class="navbar">
+	<ul class="navbar-links">
+    <li><a href="index.html">Home</a></li>
+		<li><a href="blogs.html">Bloges</a></li>
+		<li><a href="about.html">About</a></li>
+	</ul>
+</nav>
+
+<main class="page">
+   
+ 
+<article class="markdown-body" data-theme="light">
+	<div id="content">
+        <p><strong>Connecting to Databases and Writing Queries in Go</strong></p>
+<p>Go (or Golang) is a powerful, statically typed language widely used for building scalable applications. In this tutorial, we'll cover how to connect to three popular databases—PostgreSQL, SQLite, and MySQL—using Go, along with examples of basic queries.</p>
+<hr>
+<h2><strong>1. Setting Up Your Go Project</strong></h2>
+<p>Before working with databases, ensure you have Go installed. You can create a new project with the following commands:</p>
+<pre><code class="language-bash">mkdir go-database-tutorial
+cd go-database-tutorial
+go mod init go-database-tutorial
+</code></pre>
+<p>To interact with databases, we'll use the <code>database/sql</code> package along with specific drivers for each database:</p>
+<ul>
+<li><strong>PostgreSQL</strong>: <code>github.com/lib/pq</code></li>
+<li><strong>SQLite</strong>: <code>modernc.org/sqlite</code></li>
+<li><strong>MySQL</strong>: <code>github.com/go-sql-driver/mysql</code></li>
+</ul>
+<p>Install the relevant drivers for your database:</p>
+<pre><code class="language-bash">go get github.com/lib/pq
+# For SQLite
+go get modernc.org/sqlite
+# For MySQL
+go get github.com/go-sql-driver/mysql
+</code></pre>
+<hr>
+<h2><strong>2. Connecting to Databases</strong></h2>
+<h3><strong>PostgreSQL Connection</strong></h3>
+<pre><code class="language-go">package main
+
+import (
+	&quot;database/sql&quot;
+	&quot;fmt&quot;
+	&quot;log&quot;
+	_ &quot;github.com/lib/pq&quot;
+)
+
+func main() {
+	connStr := &quot;user=username password=yourpassword dbname=yourdb sslmode=disable&quot;
+	db, err := sql.Open(&quot;postgres&quot;, connStr)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
+
+	fmt.Println(&quot;Connected to PostgreSQL successfully!&quot;)
+}
+</code></pre>
+<h3><strong>SQLite Connection</strong></h3>
+<pre><code class="language-go">package main
+
+import (
+	&quot;database/sql&quot;
+	&quot;fmt&quot;
+	&quot;log&quot;
+	_ &quot;modernc.org/sqlite&quot;
+)
+
+func main() {
+	db, err := sql.Open(&quot;sqlite&quot;, &quot;file:test.db?cache=shared&amp;mode=rwc&quot;)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
+
+	fmt.Println(&quot;Connected to SQLite successfully!&quot;)
+}
+</code></pre>
+<h3><strong>MySQL Connection</strong></h3>
+<pre><code class="language-go">package main
+
+import (
+	&quot;database/sql&quot;
+	&quot;fmt&quot;
+	&quot;log&quot;
+	_ &quot;github.com/go-sql-driver/mysql&quot;
+)
+
+func main() {
+	connStr := &quot;username:password@tcp(127.0.0.1:3306)/yourdb&quot;
+	db, err := sql.Open(&quot;mysql&quot;, connStr)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
+
+	fmt.Println(&quot;Connected to MySQL successfully!&quot;)
+}
+</code></pre>
+<hr>
+<h2><strong>3. Writing Basic Queries</strong></h2>
+<h3><strong>Creating a Table</strong></h3>
+<p>For all databases, we can use the <code>Exec</code> method to execute SQL statements such as creating tables.</p>
+<h4>Example (for PostgreSQL, SQLite, or MySQL):</h4>
+<pre><code class="language-go">query := `CREATE TABLE IF NOT EXISTS posts (
+	id SERIAL PRIMARY KEY,
+	title VARCHAR(255),
+	content TEXT,
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)`
+
+_, err := db.Exec(query)
+if err != nil {
+	log.Fatalf(&quot;Error creating table: %v&quot;, err)
+}
+fmt.Println(&quot;Table created successfully!&quot;)
+</code></pre>
+<h3><strong>Inserting Data</strong></h3>
+<pre><code class="language-go">query := `INSERT INTO posts (title, content) VALUES ($1, $2)`
+// Use ? instead of $1, $2 for MySQL and SQLite
+_, err := db.Exec(query, &quot;My First Post&quot;, &quot;This is the content of my first post.&quot;)
+if err != nil {
+	log.Fatalf(&quot;Error inserting data: %v&quot;, err)
+}
+fmt.Println(&quot;Data inserted successfully!&quot;)
+</code></pre>
+<h3><strong>Fetching Data</strong></h3>
+<pre><code class="language-go">rows, err := db.Query(&quot;SELECT id, title, content FROM posts&quot;)
+if err != nil {
+	log.Fatalf(&quot;Error fetching data: %v&quot;, err)
+}
+defer rows.Close()
+
+for rows.Next() {
+	var id int
+	var title, content string
+	if err := rows.Scan(&amp;id, &amp;title, &amp;content); err != nil {
+		log.Fatalf(&quot;Error scanning row: %v&quot;, err)
+	}
+	fmt.Printf(&quot;ID: %d, Title: %s, Content: %s\n&quot;, id, title, content)
+}
+</code></pre>
+<h3><strong>Updating Data</strong></h3>
+<pre><code class="language-go">query := `UPDATE posts SET content = $1 WHERE id = $2`
+// Use ? for MySQL and SQLite
+_, err := db.Exec(query, &quot;Updated content&quot;, 1)
+if err != nil {
+	log.Fatalf(&quot;Error updating data: %v&quot;, err)
+}
+fmt.Println(&quot;Data updated successfully!&quot;)
+</code></pre>
+<h3><strong>Deleting Data</strong></h3>
+<pre><code class="language-go">query := `DELETE FROM posts WHERE id = $1`
+// Use ? for MySQL and SQLite
+_, err := db.Exec(query, 1)
+if err != nil {
+	log.Fatalf(&quot;Error deleting data: %v&quot;, err)
+}
+fmt.Println(&quot;Data deleted successfully!&quot;)
+</code></pre>
+<hr>
+<h3>converting data to slice</h3>
+<p>you can fetch data and convert it to slice and send it or work with the data</p>
+<pre><code class="language-go">type Note struct{
+	Id string
+	Title string
+	Text string
+}
+getNotes:=func (w http.ResponseWriter, r *http.Request)  {
+row,_ := db.Query(&quot;SELECT id, title, text FROM notes&quot;)
+defer row.Close()
+
+var notes []Note // we make a slice of Notes and each note is a struct 
+for row.Next() {  // we can use the  next function to itrate over all the rows inside the qurey 
+	var note Note
+	row.Scan(&amp;note.Id,&amp;note.Title, &amp;note.Text) // with the scan function we add all the data to each note inside the slice 
+	notes = append(notes, note) // we append each note to the note slice 
+}
+html, _ := template.ParseFiles(&quot;index.html&quot;)
+html.Execute(w,notes)
+
+}
+</code></pre>
+<hr>
+<h2><strong>4. Wrapping Up</strong></h2>
+<p>You’ve now learned how to connect to PostgreSQL, SQLite, and MySQL databases and execute basic SQL queries using Go. To make your applications production-ready, consider the following best practices:</p>
+<ul>
+<li>Use connection pooling libraries like <code>github.com/jmoiron/sqlx</code> or <code>github.com/golang-migrate/migrate</code> for advanced database management.</li>
+<li>Sanitize inputs to prevent SQL injection.</li>
+<li>Use environment variables or a configuration file to manage database credentials.</li>
+</ul>
+<p>With these fundamentals, you can start building Go applications that interact with databases efficiently!</p>
+
+	</div>
+</article>
+</main>
+<footer class="footer">
+    <p class="content">The hidden footer</p>
+  </footer>
+</body>
+</html>

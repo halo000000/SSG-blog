@@ -1,0 +1,20 @@
+{
+
+"content":[
+
+{"title":"alpine.js","description":"this is about the main ","image":"./src/a.png","date":"1/1/2000","link":"alppin.html","sourc":"/alpine-js.md"},
+{"title":"what is a databse","description":"we will talke about what is a databse","image":"./src/a.png","date":"12/30/2024","link":"databse.html","sourc":"/databse.md"},
+{"title":"flages in go-lang","description":"what is the best way to make flages  ","image":"./src/a.png","date":"12/30/2024","link":"flag.html","sourc":"/flag.md"},
+{"title":"fmt in go-lang","description":"this how to do string stuff with go-lang ","image":"./src/a.png","date":"12/30/2024","link":"fmt.html","sourc":"/fmt.md"}
+
+
+
+
+
+
+
+]
+
+
+
+}
